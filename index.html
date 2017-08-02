@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta charset="UTF-8">
+	<title>Train Scheduler</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="reset.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- Bootswatch Styling for Improving the Aesthetics -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css">
+
+	<!-- Font Awesome CSS Icons (For cool glyphicons) -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+	<div class="container">
+ 
+		<div class="jumbotron">
+			<h1 class="text-center"><strong></i>Anytime Is Train Time</strong></h1>
+		</div>
+
+<div class="panel panel-default">
+ <table class="table">
+ <div class="panel-heading">
+<i class="fa fa-list-alt"></i>Current Train Schedule
+</div>
+ <thead>
+      <tr>
+        <th>Train Name</th>
+        <th>Destination</th>
+        <th>Frequency (Min)</th>
+        <th>Next Arrival</th>
+        <th>Minutes Away</th>
+      </tr>
+    </thead>
+    <tbody>
+    <!--populate dynamically created row elements here-->
+
+    </tbody>
+  </table>
+  </div>
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<i class="fa fa-list-alt"></i> Add Train
+					</div>
+					<div class="panel-body">
+						<form id="artist-form">
+							<div class="form-group">
+								<label for="train-name">Train Name:</label>
+				    			<input type="text" class="form-control" id="train-name" placeholder="train name">
+							</div>
+								<div class="destination">
+				    			<label for="destination">Destination:</label>
+				    			<input type="text" class="form-control" id="destination" placeholder="destination">
+				    		</div>
+				    			<div class="first-train-time">
+				    			<label for="first-train-time">First train time:</label>
+				    			<input type="text" class="form-control" id="first-train-time" placeholder="first train time">
+				    		</div>
+				    		<div class="frequency">
+				    			<label for="frequency">Frequency (min):</label>
+				    			<input type="number" class="form-control" id="frequency" placeholder="frequency">
+				    		</div>
+				    		<br>
+				    		<button class="btn" id="submit-search-info"><span class="glyphicon glyphicon-search"></span>Submit</button>
+			  			</form>
+					</div>
+				</div>
+
+		</div>
+	</div>
+	<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+	<script type="text/javascript" src="app.js"></script>
+</body>
+</html>
