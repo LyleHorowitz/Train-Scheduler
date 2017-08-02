@@ -11,8 +11,8 @@
 
 
   var database = firebase.database();
-  var nextarrival;
-  var minaway;
+  var nextArrival;
+  var minAway;
 
 
 $(document).on("click","#submit-search-info",function(event){
@@ -35,5 +35,27 @@ database.ref().push({
 		dataAdded: firebase.database.ServerValue.TIMESTAMP
 
 });//end of ref.push
+
+});
+
+// code above works fully, code below this is untested 
+
+database.ref().on("child_added",function(childSnap){
+
+		var date_format = new Date(childSnap.val().date);
+		var today = new Date();
+
+		nextArrival = (today.getMonth()+1) - (date_format.getMonth()+1);
+
+		minAway = nextArrival * childSnap.val().frequency;
+
+		var new_row = $("<tr>");
+		new_row.append("<td>" + childSnap.val().name + "</td>"
+		+ "<td>" + childSnap.val().name + "</td>"
+		+ "<td>" + childSnap.val().destination + "</td>"
+		+ "<td>" + nextArrival + "</td>"
+		+ "<td>" + childSnap.val().frequency + "</td>");
+
+		$("tbody").append(new_row);
 
 });
