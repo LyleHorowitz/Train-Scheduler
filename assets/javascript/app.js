@@ -11,56 +11,29 @@
 
 
   var database = firebase.database();
-  var mo_worked;
-  var billed;
+  var nextarrival;
+  var minaway;
 
 
 $(document).on("click","#submit-search-info",function(event){
 	event.preventDefault();
 
-	//console.log("Clicked!");
+var name = $("#train-name").val();
+var destination = $("#destination").val();
+var firsttrain = $("#first-train-time").val();
+var frequency = $("#frequency").val();
 
-	var name = $("#train-name").val();
-	var destination = $("#destination").val();
-	var first train = $("#first-train-time").val();
-	var frequency = $("#frequency").val();
+var date_format = new Date();
+var today = new Date();
 
-	var date_format = new Date(date);
-	var today = new Date();
-
-	mo_worked = (today.getMonth()+1) - (date_format.getMonth()+1);
-
-	billed = mo_worked * rate;
-
-	database.ref().push({
+database.ref().push({
 
 		name: name,
-		role: role,
-		rate: rate,
-		date: date,
+		destination: destination,
+		firsttrain: firsttrain,
+		frequency: frequency,
 		dataAdded: firebase.database.ServerValue.TIMESTAMP
 
-	});//end of ref.push
-
-});
-
-database.ref().on("child_added",function(childSnap){
-
-		var date_format = new Date(childSnap.val().date);
-		var today = new Date();
-
-		mo_worked = (today.getMonth()+1) - (date_format.getMonth()+1);
-
-		billed = mo_worked * childSnap.val().rate;
-
-		var new_row = $("<tr>");
-		new_row.append("<td>" + childSnap.val().name + "</td>"
-		+ "<td>" + childSnap.val().role + "</td>"
-		+ "<td>" + childSnap.val().date + "</td>"
-		+ "<td>" + mo_worked + "</td>"
-		+ "<td>" + childSnap.val().rate + "</td>"
-		+ "<td>" + billed + "</td>");
-
-		$("tbody").append(new_row);
+});//end of ref.push
 
 });
