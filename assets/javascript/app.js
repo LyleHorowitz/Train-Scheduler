@@ -29,8 +29,8 @@ var today = new Date();
 database.ref().push({
 
 		name: name,
-		destination: destination,
 		firsttrain: firsttrain,
+		destination: destination,
 		frequency: frequency,
 		dataAdded: firebase.database.ServerValue.TIMESTAMP
 
@@ -49,13 +49,11 @@ database.ref().on("child_added",function(childSnap){
 
 		minAway = nextArrival * childSnap.val().frequency;
 
-		var new_row = $("<tr>");
+        var new_row = $("<tr>");
 		new_row.append("<td>" + childSnap.val().name + "</td>"
-		+ "<td>" + childSnap.val().name + "</td>"
-		+ "<td>" + childSnap.val().destination + "</td>"
-		+ "<td>" + nextArrival + "</td>"
-		+ "<td>" + childSnap.val().frequency + "</td>");
-
-		$("tbody").append(new_row);
+        + "<td>" + childSnap.val().destination + "</td>"
+        + "<td>" + childSnap.val().frequency + "</td>");
+        + "<td>" + nextArrival + "</td>"
+        $("tbody").append(new_row);
 
 });
