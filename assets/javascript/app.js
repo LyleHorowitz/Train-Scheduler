@@ -38,22 +38,29 @@ database.ref().push({
 
 });
 
-// code above works fully, code below this is untested 
-
 database.ref().on("child_added",function(childSnap){
 
-		var date_format = new Date(childSnap.val().date);
-		var today = new Date();
+        var firstTimeConverted = moment(childSnap.val().firsttrain, "hh:mm").subtract(1, "years");
+        var currenTime = moment();
+        var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+        console.log("DIFFERENCE IN TIME: " + diffTime);
+        var tRemainder = diffTime % childSnap.val().frequency;
+        console.log(tRemainder);
+        var minAway = childSnap.val().frequency - tRemainder;
+        console.log("MINUTES TILL TRAIN: " + minAway);
+        var nextTrain = moment().add(minAway, "minutes");
+        console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
 
-		nextArrival = (today.getMonth()+1) - (date_format.getMonth()+1);
 
-		minAway = nextArrival * childSnap.val().frequency;
 
         var new_row = $("<tr>");
 		new_row.append("<td>" + childSnap.val().name + "</td>"
         + "<td>" + childSnap.val().destination + "</td>"
-        + "<td>" + childSnap.val().frequency + "</td>");
-        + "<td>" + nextArrival + "</td>"
+        + "<td>" + childSnap.val().frequency + "</td>"
+        + "<td>" + moment.unix(nextTrain).format('hh:mm:ss') + "</td>"
+        + "<td>" + minAway + "</td>")
         $("tbody").append(new_row);
 
 });
+
+    
